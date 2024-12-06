@@ -1,11 +1,10 @@
 version: '3.3'
-
 services:
   db:
     image: mysql:8.0.19
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - db_data:/var/lib/mysql  # Correct the syntax here (no space)
+      - db_data:/var/lib/mysql
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=wordpress
@@ -25,5 +24,5 @@ services:
       - WORDPRESS_DB_NAME=databaseword
 
 volumes:
-  db_data:  # This defines the named volume
+  db_data:
 
