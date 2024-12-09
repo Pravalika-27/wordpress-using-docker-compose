@@ -32,27 +32,4 @@ yum install git -y
    30  history
 
 
-   pipeline pollscm :
-
-   pipeline {
-    agent any
-    triggers {
-        pollSCM('* * * * *') // Check SCM every minute
-    }
-    stages {
-        stage('Clone Repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Pravalika-27/pravalika-1.git'
-            }
-        }
-        stage('Deploy Application') {
-            steps {
-                sh '''
-                docker-compose down
-                docker-compose up -d
-                '''
-            }
-        }
-    }
-}
-
+   
