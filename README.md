@@ -32,4 +32,35 @@ yum install git -y
    30  history
 
 
+
+#########################DOCKER,KUBECTL,MINIKUBE INSTALLATION ################################################
+
+ 1. Install Docker on Amazon Linux 2
+
+sudo yum update -y
+sudo amazon-linux-extras enable docker
+sudo yum install docker -y
+sudo service docker start
+sudo systemctl enable docker
+
+(Optional but recommended): Add your user to the docker group
+
+
+sudo usermod -aG docker $USER
+
+ 2. Install kubectl (Kubernetes CLI)
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+
+
+ 3. Install Minikube (Local Kubernetes Cluster)
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+chmod +x minikube-linux-amd64
+sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+🔹 4. Start Minikube Using Docker Driver
+
+minikube start --driver=docker
    
