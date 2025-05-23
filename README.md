@@ -48,6 +48,9 @@ sudo systemctl enable docker
 
 sudo usermod -aG docker $USER
 
+sudo usermod -aG docker $USER
+ newgrp docker
+
  2. Install kubectl (Kubernetes CLI)
 
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
