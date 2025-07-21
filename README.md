@@ -1,19 +1,19 @@
 # wordpress-using-docker-compose
 
 yum install git -y
-    2  yum install docker -y
-    3  systemctl start docker
-    4  sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    5  sudo chmod +x /usr/local/bin/docker-compose
-    6  docker-compose --version
-    7  sudo usermod -aG docker ec2-user
-    8  sudo chmod 666 /var/run/docker.sock
-    9   sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-   10   systemctl start docker
-   11  sudo systemctl status docker
-   12  ls /var/run/docker.sock
-   13  sudo chmod 666 /var/run/docker.sock
-   14  sudo chmod +x /usr/local/bin/docker-compose
+     yum install docker -y
+    systemctl start docker
+    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    docker-compose --version
+    sudo usermod -aG docker ec2-user
+    sudo chmod 666 /var/run/docker.sock
+    sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+   systemctl start docker
+   sudo systemctl status docker
+   ls /var/run/docker.sock
+   sudo chmod 666 /var/run/docker.sock
+   sudo chmod +x /usr/local/bin/docker-compose
    15  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
    16  sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
    17  sudo yum install java-17-amazon-corretto-devel -y
