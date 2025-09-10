@@ -14,14 +14,14 @@ yum install git -y
    ls /var/run/docker.sock
    sudo chmod 666 /var/run/docker.sock
    sudo chmod +x /usr/local/bin/docker-compose
-   15  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-   16  sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
-   17  sudo yum install java-17-amazon-corretto-devel -y
-   18  java --version
-   19  yum install jenkins -y
-   20  yum install mysql -y
-   21  systemctl start jenkins
-   22  systemctl status jenkins
+     sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+     sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+     sudo yum install java-17-amazon-corretto-devel -y
+     java --version
+     yum install jenkins -y
+    yum install mysql -y
+     systemctl start jenkins
+     systemctl status jenkins
    23  history
    24  cat /var/lib/jenkins/secrets/initialAdminPassword
    25  git init
