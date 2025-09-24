@@ -66,4 +66,77 @@ sudo mv minikube-linux-amd64 /usr/local/bin/minikube
 🔹 4. Start Minikube Using Docker Driver
 
 minikube start --driver=docker
+
+
+
+
+
+
+
+
+
+
+
+
+###############################################################
+sudo apt update && sudo apt upgrade -y
+
+sudo apt install -y docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo usermod -aG docker ubuntu
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+sudo apt install -y conntrack
+
+sudo systemctl status docker
+
+minikube start --driver=docker --cpus=2 --memory=3072 --disk-size=20g
+minikube addons enable ingress
+minikube status
+kubectl get nodes
+
+
+
+# Set up Minikube's Docker environment
+eval $(minikube docker-env)
+
+# Build images using Minikube's Docker daemon
+docker build -t frontend-app:latest ./app/frontend
+docker build -t backend-app:latest ./app/backend
+
+# Verify images are built in Minikube
+docker images | grep -E '(frontend|backend)'
+
+
+kubectl delete -f k8s/deployment-backend.yaml
+kubectl delete -f k8s/deployment-frontend.yaml
+
+kubectl apply -f k8s/deployment-backend.yaml
+kubectl apply -f k8s/deployment-frontend.yaml
+
+
+minikube ip
+
+# Forward local port 8080 to frontend service port 80
+
+kubectl port-forward -n demo-app service/frontend-service 8080:80
+
+pkill -f "kubectl port-forward"
+kubectl port-forward -n demo-app service/frontend-service 8080:80 --address=0.0.0.0 &
+
+# Update the fetch URL to use relative path
+sed -i 's|http://backend-service.demo-app.svc.cluster.local:8080|/api|g' app/frontend/index.html
+
+minikube service frontend-service -n demo-app --url
+
+kubectl describe ingress app-ingress -n demo-app
+
+# Test the ingress routing
+curl http://localhost:8080/api/data
    
